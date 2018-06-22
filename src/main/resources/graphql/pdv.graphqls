@@ -3,6 +3,7 @@ type Pdv {
  	tradingName: String!
  	ownerName: String!
  	document: String!
+ 	address: Address!
 }
 
 type Query {
@@ -10,5 +11,5 @@ type Query {
 }
 
 type Mutation {
-  newPdv( tradingName: String!, ownerName: String!, document: String!) : Pdv!
+  newPdv( tradingName: String!, ownerName: String!, document: String!, address: AddressInput!) : Pdv!
 }

@@ -1,0 +1,9 @@
+type Address {
+	type: String!
+	coordinates: [Int!]!
+}
+
+input AddressInput {
+	type: String!
+	coordinates: [Int!]!
+}
