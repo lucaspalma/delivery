@@ -1,0 +1,14 @@
+type Pdv {
+ 	id: ID!
+ 	tradingName: String!
+ 	ownerName: String!
+ 	document: String!
+}
+
+type Query {
+	findAllPdvs: [Pdv]!
+}
+
+type Mutation {
+  newPdv( tradingName: String!, ownerName: String!, document: String!) : Pdv!
+}
