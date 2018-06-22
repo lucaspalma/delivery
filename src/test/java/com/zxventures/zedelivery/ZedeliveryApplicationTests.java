@@ -43,7 +43,7 @@ public class ZedeliveryApplicationTests {
 					"      }" +
 					"   }\"" +
 					"}";
-		String jsonResposta = "{\"data\":{\"newPdv\":{\"tradingName\":\"Bar do Bardo\",\"ownerName\":\"Bardo\",\"document\":\"66.881.980/0001-97\",\"address\":{\"type\":\"Point\",\"coordinates\":[10, 20]}}}}";
+		String jsonResposta = "{\"data\":{\"newPdv\":{\"tradingName\":\"Bar do Bardo\",\"ownerName\":\"Bardo\",\"document\":\"66.881.980/0001-97\",\"address\":{\"type\":\"Point\",\"coordinates\":[10,20]}}}}";
 
 		ResponseEntity<String> postForEntity = restTemplate.postForEntity("/graphql", mutation, String.class);
 		assertEquals(HttpStatus.OK, postForEntity.getStatusCode());

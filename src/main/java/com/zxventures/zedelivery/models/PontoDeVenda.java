@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
-public class Pdv {
+public class PontoDeVenda {
 
     @Id
     @GeneratedValue
@@ -27,7 +27,7 @@ public class Pdv {
     @Column(unique = true)
     private String document;
     
-    public Pdv(String tradingName, String ownerName, String document) {
+    public PontoDeVenda(String tradingName, String ownerName, String document) {
 		this.tradingName = tradingName;
 		this.ownerName = ownerName;
 		this.document = document;
@@ -86,7 +86,7 @@ public class Pdv {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Pdv other = (Pdv) obj;
+		PontoDeVenda other = (PontoDeVenda) obj;
 		if (document == null) {
 			if (other.document != null)
 				return false;

@@ -1,7 +1,7 @@
 package com.zxventures.zedelivery.resolvers;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
-import com.zxventures.zedelivery.models.Pdv;
+import com.zxventures.zedelivery.models.PontoDeVenda;
 import com.zxventures.zedelivery.repositories.PdvRepository;
 
 public class Mutation implements GraphQLMutationResolver {
@@ -11,8 +11,8 @@ public class Mutation implements GraphQLMutationResolver {
 		this.pdvRepository = pdvRepository;
     }
 
-    public Pdv newPdv(String tradingName,String ownerName,String document) {
-    	Pdv pv = new Pdv(tradingName, ownerName, document);
+    public PontoDeVenda newPdv(String tradingName,String ownerName,String document) {
+    	PontoDeVenda pv = new PontoDeVenda(tradingName, ownerName, document);
     	pdvRepository.save(pv);
     	return pv;
     }

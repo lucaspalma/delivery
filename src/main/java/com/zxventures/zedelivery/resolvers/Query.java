@@ -1,7 +1,7 @@
 package com.zxventures.zedelivery.resolvers;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
-import com.zxventures.zedelivery.models.Pdv;
+import com.zxventures.zedelivery.models.PontoDeVenda;
 import com.zxventures.zedelivery.repositories.PdvRepository;
 
 public class Query implements GraphQLQueryResolver {
@@ -13,7 +13,7 @@ public class Query implements GraphQLQueryResolver {
 		this.pdvRepository = pdvRepository;
 	}
 	
-	public Iterable<Pdv> findAllPdvs() {
+	public Iterable<PontoDeVenda> findAllPdvs() {
         return pdvRepository.findAll();
     }
 }
