@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.vividsolutions.jts.geom.Point;
+
 @Entity
 public class PontoDeVenda {
 
@@ -27,10 +29,14 @@ public class PontoDeVenda {
     @Column(unique = true)
     private String document;
     
-    public PontoDeVenda(String tradingName, String ownerName, String document) {
+    @NotNull
+    private Point address;
+    
+    public PontoDeVenda(String tradingName, String ownerName, String document, Point address) {
 		this.tradingName = tradingName;
 		this.ownerName = ownerName;
 		this.document = document;
+		this.address = address;
 	}
     
     public Long getId() {
@@ -63,6 +69,14 @@ public class PontoDeVenda {
 
 	public void setDocument(String document) {
 		this.document = document;
+	}
+	
+	public Point getAddress() {
+		return address;
+	}
+
+	public void setAddress(Point address) {
+		this.address = address;
 	}
 
 	@Override
