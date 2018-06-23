@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.geom.Point;
 
 @Entity
@@ -32,11 +33,14 @@ public class PontoDeVenda {
     @NotNull
     private Point address;
     
-    public PontoDeVenda(String tradingName, String ownerName, String document, Point address) {
+    private MultiPolygon coverageArea;
+    
+    public PontoDeVenda(String tradingName, String ownerName, String document, Point address, MultiPolygon coverageArea) {
 		this.tradingName = tradingName;
 		this.ownerName = ownerName;
 		this.document = document;
 		this.address = address;
+		this.coverageArea = coverageArea;
 	}
     
     public Long getId() {
@@ -77,6 +81,14 @@ public class PontoDeVenda {
 
 	public void setAddress(Point address) {
 		this.address = address;
+	}
+
+	public MultiPolygon getCoverageArea() {
+		return coverageArea;
+	}
+
+	public void setCoverageArea(MultiPolygon coverageArea) {
+		this.coverageArea = coverageArea;
 	}
 
 	@Override

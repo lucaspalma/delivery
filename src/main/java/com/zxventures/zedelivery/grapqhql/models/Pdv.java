@@ -3,6 +3,7 @@ package com.zxventures.zedelivery.grapqhql.models;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.zxventures.zedelivery.grapqhql.services.MultiPolygonParser;
 import com.zxventures.zedelivery.models.PontoDeVenda;
 
 public class Pdv {
@@ -22,12 +23,15 @@ public class Pdv {
     private String document;
 
     private Address address;
+    
+    private CoverageArea coverageArea;
 
     public Pdv(PontoDeVenda pontoDeVenda) {
     	this.tradingName = pontoDeVenda.getTradingName();
     	this.ownerName = pontoDeVenda.getOwnerName();
     	this.document = pontoDeVenda.getDocument();
     	this.address = new Address(pontoDeVenda.getAddress());
+    	this.coverageArea = new CoverageArea(MultiPolygonParser.getCoordinatesList(pontoDeVenda.getCoverageArea()));
 	}
     
 	public Long getId() {
@@ -49,5 +53,10 @@ public class Pdv {
 	public Address getAddress() {
 		return address;
 	}
-    
+
+	public CoverageArea getCoverageArea() {
+		return coverageArea;
+	}
+
+	
 }
