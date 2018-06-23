@@ -1,0 +1,9 @@
+type CoverageArea {
+	type: String!
+	coordinates: [[[[Int!]]]]!
+}
+
+input CoverageAreaInput {
+	type: String!
+	coordinates: [[[[Int!]]]]!
+}
