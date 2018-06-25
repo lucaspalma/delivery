@@ -4,4 +4,8 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.zxventures.zedelivery.models.PontoDeVenda;
 
-public interface PdvRepository extends CrudRepository<PontoDeVenda, Long> { }
+public interface PdvRepository extends CrudRepository<PontoDeVenda, Long> { 
+	
+	PontoDeVenda findByDocument(String document);
+	
+}

@@ -33,7 +33,11 @@ public class PontoDeVenda {
     @NotNull
     private Point address;
     
+    @NotNull
     private MultiPolygon coverageArea;
+
+    @Deprecated
+    public PontoDeVenda() {}
     
     public PontoDeVenda(String tradingName, String ownerName, String document, Point address, MultiPolygon coverageArea) {
 		this.tradingName = tradingName;

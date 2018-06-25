@@ -12,6 +12,7 @@ import com.zxventures.zedelivery.exceptions.GraphQLErrorAdapter;
 import com.zxventures.zedelivery.repositories.PdvRepository;
 import com.zxventures.zedelivery.resolvers.Mutation;
 import com.zxventures.zedelivery.resolvers.Query;
+import com.zxventures.zedelivery.validators.PontoDeVendaValidator;
 
 import graphql.ExceptionWhileDataFetching;
 import graphql.GraphQLError;
@@ -56,7 +57,7 @@ public class ZedeliveryApplication {
 	}
 	
 	@Bean
-	public Mutation mutation(PdvRepository pdvRepository) {
-		return new Mutation(pdvRepository);
+	public Mutation mutation(PdvRepository pdvRepository, PontoDeVendaValidator pontoDeVendaValidator) {
+		return new Mutation(pdvRepository, pontoDeVendaValidator);
 	}
 }
