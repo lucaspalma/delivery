@@ -40,6 +40,7 @@ public class ZedeliveryApplicationTests {
 					"              ]" + 
 					"         }" +
 					"      ) {" +
+					"         id, " +
 					"         tradingName" +
 					"         ownerName" +
 					"         document" +
@@ -54,7 +55,7 @@ public class ZedeliveryApplicationTests {
 					"      }" +
 					"   }\"" +
 					"}";
-		String jsonResposta = "{\"data\":{\"newPdv\":{\"tradingName\":\"Bar do Bardo\",\"ownerName\":\"Bardo\",\"document\":\"66.881.980/0001-97\",\"address\":{\"type\":\"Point\",\"coordinates\":[10,20]},\"coverageArea\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[30,20],[45,40],[10,40],[30,20]]],[[[15,5],[40,10],[10,20],[5,10],[15,5]]]]}}}}";
+		String jsonResposta = "{\"data\":{\"newPdv\":{\"id\":\"1\",\"tradingName\":\"Bar do Bardo\",\"ownerName\":\"Bardo\",\"document\":\"66.881.980/0001-97\",\"address\":{\"type\":\"Point\",\"coordinates\":[10,20]},\"coverageArea\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[30,20],[45,40],[10,40],[30,20]]],[[[15,5],[40,10],[10,20],[5,10],[15,5]]]]}}}}";
 
 		ResponseEntity<String> postForEntity = restTemplate.postForEntity("/graphql", mutation, String.class);
 		assertEquals(HttpStatus.OK, postForEntity.getStatusCode());

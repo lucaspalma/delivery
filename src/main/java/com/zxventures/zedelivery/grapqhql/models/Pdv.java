@@ -27,6 +27,7 @@ public class Pdv {
     private CoverageArea coverageArea;
 
     public Pdv(PontoDeVenda pontoDeVenda) {
+    	this.id =pontoDeVenda.getId();
     	this.tradingName = pontoDeVenda.getTradingName();
     	this.ownerName = pontoDeVenda.getOwnerName();
     	this.document = pontoDeVenda.getDocument();
