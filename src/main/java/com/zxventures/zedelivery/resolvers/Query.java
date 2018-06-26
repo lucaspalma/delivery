@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
+import com.vividsolutions.jts.geom.Point;
+import com.vividsolutions.jts.io.ParseException;
+import com.vividsolutions.jts.io.WKTReader;
 import com.zxventures.zedelivery.grapqhql.models.Pdv;
 import com.zxventures.zedelivery.models.PontoDeVenda;
 import com.zxventures.zedelivery.repositories.PdvRepository;
@@ -27,5 +30,11 @@ public class Query implements GraphQLQueryResolver {
 	
 	public Pdv findPdv(Long id) {
 		return new Pdv(pdvRepository.findById(id).get());
+    }
+	
+	public Pdv searchPdv(Double lng, Double lat) throws ParseException {
+		Point point = (Point) new WKTReader().read("POINT(" + lng + " " + lat + ")");
+		List<PontoDeVenda> pontosDeVenda = pdvRepository.searchPdvsThatCovergeThis(point);
+		return new Pdv(pontosDeVenda.get(0));
     }
 }
