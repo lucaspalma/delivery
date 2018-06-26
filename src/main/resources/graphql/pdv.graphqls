@@ -9,6 +9,7 @@ type Pdv {
 
 type Query {
 	findAllPdvs: [Pdv]!
+	findPdv(id: ID!): Pdv!
 }
 
 type Mutation {

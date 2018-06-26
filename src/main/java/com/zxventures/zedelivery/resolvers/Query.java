@@ -24,4 +24,8 @@ public class Query implements GraphQLQueryResolver {
 		}
         return pdvs;
     }
+	
+	public Pdv findPdv(Long id) {
+		return new Pdv(pdvRepository.findById(id).get());
+    }
 }
