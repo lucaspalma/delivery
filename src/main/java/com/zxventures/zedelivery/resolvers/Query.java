@@ -35,6 +35,15 @@ public class Query implements GraphQLQueryResolver {
 	public Pdv searchPdv(Double lng, Double lat) throws ParseException {
 		Point point = (Point) new WKTReader().read("POINT(" + lng + " " + lat + ")");
 		List<PontoDeVenda> pontosDeVenda = pdvRepository.searchPdvsThatCovergeThis(point);
-		return new Pdv(pontosDeVenda.get(0));
+		double minimo = Double.POSITIVE_INFINITY;
+		PontoDeVenda pdv = null;
+		for (PontoDeVenda pontoDeVenda : pontosDeVenda) {
+			double distancia = pontoDeVenda.getAddress().distance(point);
+			if(distancia < minimo) {
+				pdv = pontoDeVenda;
+				minimo = distancia;
+			}
+		}
+		return new Pdv(pdv);
     }
 }
