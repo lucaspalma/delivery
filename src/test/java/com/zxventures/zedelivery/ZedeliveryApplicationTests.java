@@ -28,7 +28,7 @@ public class ZedeliveryApplicationTests {
 	
 	@Autowired
 	private PdvRepository pdvRepository;
-
+	
 	@Test
 	public void consigoCadastrarUmPdvPassandoTodosOsDadosObrigatorios() {
 		String mutation =
@@ -177,5 +177,46 @@ public class ZedeliveryApplicationTests {
 		assertEquals(HttpStatus.OK, postForEntity.getStatusCode());
 		assertEquals(jsonResposta, postForEntity.getBody());
 	}
+	
+	@Test
+	public void naBuscaUmPdvQueAtendeMinhaLocalizacaoPegaAqueleQueEstaMaisPerto() throws ParseException {
+		MultiPolygon areaCobertura= (MultiPolygon) new WKTReader().read("MultiPolygon(((120 120, 120 200, 200 200, 120 120)), ((130 130, 200 130, 200 200, 130 130)))");
+		
+		Point enderecoLonge = (Point) new WKTReader().read("POINT(200 200)");
+		PontoDeVenda pontoDeVendaLonge = new PontoDeVenda("Winter is coming", "Stark", "86.823.201/0001-04", enderecoLonge, areaCobertura);
+		pdvRepository.save(pontoDeVendaLonge);
+		
+		Point enderecoPerto = (Point) new WKTReader().read("POINT(150 150)");
+		PontoDeVenda pontoDeVendaPerto = new PontoDeVenda("Fire and blood", "Targaryen", "62.407.723/0001-67", enderecoPerto, areaCobertura);
+		pdvRepository.save(pontoDeVendaPerto);
+		
+		String mutation =
+				"{" +
+				"   \"query\":\"query {" +
+				"      searchPdv(" +
+				"         lng : " + 160 + "," +
+				"         lat : " + 160 + "," +
+				"      ) {" +
+				"         id, " +
+				"         tradingName" +
+				"         ownerName" +
+				"         document" +
+				"         address {" +
+				"            type" +
+				"            coordinates" +
+				"         }" +
+				"         coverageArea {" + 
+				"            type" + 
+				"            coordinates" + 
+				"         }" +
+				"      }" +
+				"   }\"" +
+				"}";
+		String jsonResposta = "{\"data\":{\"searchPdv\":{\"id\":\""+pontoDeVendaPerto.getId()+"\",\"tradingName\":\"Fire and blood\",\"ownerName\":\"Targaryen\",\"document\":\"62.407.723/0001-67\",\"address\":{\"type\":\"Point\",\"coordinates\":[150,150]},\"coverageArea\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[120,120],[120,200],[200,200],[120,120]]],[[[130,130],[200,130],[200,200],[130,130]]]]}}}}";
+
+		ResponseEntity<String> postForEntity = restTemplate.postForEntity("/graphql", mutation, String.class);
+		assertEquals(HttpStatus.OK, postForEntity.getStatusCode());
+		assertEquals(jsonResposta, postForEntity.getBody());
+	}	
 	
 }
