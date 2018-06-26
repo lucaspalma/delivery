@@ -106,4 +106,40 @@ public class ZedeliveryApplicationTests {
 		assertEquals(jsonResposta, postForEntity.getBody());
 	}
 
+	@Test
+	public void buscaUmPdvQueAtendaAMinhaLocalizacao() throws ParseException {
+		Point endereco = (Point) new WKTReader().read("POINT(10 20)");
+		MultiPolygon areaCobertura= (MultiPolygon) new WKTReader().read("MultiPolygon(((80 80, 80 90, 90 90, 90 80, 80 80)), ((70 70, 70 75, 75 75, 70 70)))");
+		PontoDeVenda pontoDeVenda = new PontoDeVenda("Grande montanha", "Gimli", "38.670.058/0001-15", endereco, areaCobertura);
+		pdvRepository.save(pontoDeVenda);
+		
+		String mutation =
+				"{" +
+				"   \"query\":\"query {" +
+				"      searchPdv(" +
+				"         lng : " + 85 + "," +
+				"         lat : " + 85 + "," +
+				"      ) {" +
+				"         id, " +
+				"         tradingName" +
+				"         ownerName" +
+				"         document" +
+				"         address {" +
+				"            type" +
+				"            coordinates" +
+				"         }" +
+				"         coverageArea {" + 
+				"            type" + 
+				"            coordinates" + 
+				"         }" +
+				"      }" +
+				"   }\"" +
+				"}";
+		String jsonResposta = "{\"data\":{\"searchPdv\":{\"id\":\""+pontoDeVenda.getId()+"\",\"tradingName\":\"Grande montanha\",\"ownerName\":\"Gimli\",\"document\":\"38.670.058/0001-15\",\"address\":{\"type\":\"Point\",\"coordinates\":[10,20]},\"coverageArea\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[80,80],[80,90],[90,90],[90,80],[80,80]]],[[[70,70],[70,75],[75,75],[70,70]]]]}}}}";
+
+		ResponseEntity<String> postForEntity = restTemplate.postForEntity("/graphql", mutation, String.class);
+		assertEquals(HttpStatus.OK, postForEntity.getStatusCode());
+		assertEquals(jsonResposta, postForEntity.getBody());
+	}
+	
 }
