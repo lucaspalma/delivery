@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 
 import com.zxventures.zedelivery.actions.SearchPdvAction;
 import com.zxventures.zedelivery.exceptions.GraphQLErrorAdapter;
@@ -20,6 +21,7 @@ import graphql.GraphQLError;
 import graphql.servlet.GraphQLErrorHandler;
 
 @SpringBootApplication
+@ComponentScan("com.zxventures.zedelivery.*")
 public class ZedeliveryApplication {
 
 	public static void main(String[] args) {
