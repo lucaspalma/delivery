@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.zxventures.zedelivery.actions.SearchPdvAction;
 import com.zxventures.zedelivery.exceptions.GraphQLErrorAdapter;
 import com.zxventures.zedelivery.repositories.PdvRepository;
 import com.zxventures.zedelivery.resolvers.Mutation;
@@ -52,8 +53,8 @@ public class ZedeliveryApplication {
 	}
 	
 	@Bean
-	public Query query(PdvRepository pdvRepository) {
-		return new Query(pdvRepository);
+	public Query query(PdvRepository pdvRepository, SearchPdvAction searchPdvAction) {
+		return new Query(pdvRepository, searchPdvAction);
 	}
 	
 	@Bean
