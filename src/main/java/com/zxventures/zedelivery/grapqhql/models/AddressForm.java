@@ -11,7 +11,7 @@ import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.io.ParseException;
 import com.vividsolutions.jts.io.WKTReader;
 
-public class Address {
+public class AddressForm {
 
 	@NotNull
 	@NotBlank
@@ -21,9 +21,9 @@ public class Address {
 	private List<Double> coordinates = new ArrayList<>();
 	
 	@Deprecated
-	public Address() {}
+	public AddressForm() {}
 	
-	public Address(Point point) {
+	public AddressForm(Point point) {
 		this.coordinates.add(point.getX());
 		this.coordinates.add(point.getY());
 	}

@@ -11,7 +11,7 @@ import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.io.ParseException;
 import com.vividsolutions.jts.io.WKTReader;
 
-public class CoverageArea {
+public class CoverageAreaForm {
 
 	@NotNull
 	@NotBlank
@@ -21,9 +21,9 @@ public class CoverageArea {
 	private List<List<List<List<Double>>>> coordinates = new ArrayList<>();
 	
 	@Deprecated
-	public CoverageArea() {}
+	public CoverageAreaForm() {}
 	    
-	public CoverageArea(List<List<List<List<Double>>>> coordinates) {
+	public CoverageAreaForm(List<List<List<List<Double>>>> coordinates) {
 		this.coordinates = coordinates;
 	}
 

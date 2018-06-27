@@ -27,7 +27,7 @@ public class CoverageAreaTest {
 		List<List<List<Double>>> poligono1 = mother.umPoligono().addLinha(linha1).build();
 		List<List<List<Double>>> poligono2 = mother.umPoligono().addLinha(linha2).build();
 		List<List<List<List<Double>>>> multiPoligono = mother.umMultiPoligono().addPoligono(poligono1).addPoligono(poligono2).build();
-		CoverageArea coverageArea = new CoverageArea(multiPoligono);
+		CoverageAreaForm coverageArea = new CoverageAreaForm(multiPoligono);
 		
 		MultiPolygon multiPolygon = (MultiPolygon) new WKTReader().read("MULTIPOLYGON (((35 21, 43 56, 12 34, 35 21)),((15 10, 42 15, 6 12, 15 10)))");
 		Assert.assertEquals(multiPolygon, coverageArea.getMultiPolygon());

@@ -22,17 +22,17 @@ public class Pdv {
     @NotBlank
     private String document;
 
-    private Address address;
+    private AddressForm address;
     
-    private CoverageArea coverageArea;
+    private CoverageAreaForm coverageArea;
 
     public Pdv(PontoDeVenda pontoDeVenda) {
     	this.id =pontoDeVenda.getId();
     	this.tradingName = pontoDeVenda.getTradingName();
     	this.ownerName = pontoDeVenda.getOwnerName();
     	this.document = pontoDeVenda.getDocument();
-    	this.address = new Address(pontoDeVenda.getAddress());
-    	this.coverageArea = new CoverageArea(MultiPolygonParser.getCoordinatesList(pontoDeVenda.getCoverageArea()));
+    	this.address = new AddressForm(pontoDeVenda.getAddress());
+    	this.coverageArea = new CoverageAreaForm(MultiPolygonParser.getCoordinatesList(pontoDeVenda.getCoverageArea()));
 	}
     
 	public Long getId() {
@@ -51,11 +51,11 @@ public class Pdv {
 		return document;
 	}
 
-	public Address getAddress() {
+	public AddressForm getAddress() {
 		return address;
 	}
 
-	public CoverageArea getCoverageArea() {
+	public CoverageAreaForm getCoverageArea() {
 		return coverageArea;
 	}
 

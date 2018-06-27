@@ -3,7 +3,7 @@ type CoverageArea {
 	coordinates: [[[[Int!]]]]!
 }
 
-input CoverageAreaInput {
+input CoverageAreaForm {
 	type: String!
 	coordinates: [[[[Int!]]]]!
 }
