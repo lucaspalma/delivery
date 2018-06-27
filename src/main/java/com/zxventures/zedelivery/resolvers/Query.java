@@ -6,6 +6,7 @@ import java.util.List;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.vividsolutions.jts.io.ParseException;
 import com.zxventures.zedelivery.actions.SearchPdvAction;
+import com.zxventures.zedelivery.exceptions.AddressNotCoveredException;
 import com.zxventures.zedelivery.grapqhql.models.Pdv;
 import com.zxventures.zedelivery.models.PontoDeVenda;
 import com.zxventures.zedelivery.repositories.PdvRepository;
@@ -33,7 +34,7 @@ public class Query implements GraphQLQueryResolver {
 		return new Pdv(pdvRepository.findById(id).get());
     }
 	
-	public Pdv searchPdv(Double lng, Double lat) throws ParseException {
+	public Pdv searchPdv(Double lng, Double lat) throws ParseException, AddressNotCoveredException {
 		PontoDeVenda closest = searchPdvAction.searchClosestPdv(lng, lat);
 		return new Pdv(closest);
     }

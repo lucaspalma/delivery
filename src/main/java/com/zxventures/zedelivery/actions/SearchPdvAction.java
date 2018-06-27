@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.io.ParseException;
 import com.vividsolutions.jts.io.WKTReader;
+import com.zxventures.zedelivery.exceptions.AddressNotCoveredException;
 import com.zxventures.zedelivery.models.PontoDeVenda;
 import com.zxventures.zedelivery.repositories.PdvRepository;
 
@@ -18,7 +19,7 @@ public class SearchPdvAction {
 		this.pdvRepository = pdvRepository;
 	}
 	
-	public PontoDeVenda searchClosestPdv(Double lng, Double lat) throws ParseException {
+	public PontoDeVenda searchClosestPdv(Double lng, Double lat) throws ParseException, AddressNotCoveredException {
 		Point point = (Point) new WKTReader().read("POINT(" + lng + " " + lat + ")");
 		List<PontoDeVenda> pontosDeVenda = pdvRepository.searchPdvsThatCovergeThis(point);
 		double minimo = Double.POSITIVE_INFINITY;
@@ -29,6 +30,9 @@ public class SearchPdvAction {
 				closestPdv = pontoDeVenda;
 				minimo = distancia;
 			}
+		}
+		if(closestPdv == null) {
+			throw new AddressNotCoveredException();
 		}
 		return closestPdv;
 	}
