@@ -1,3 +1,11 @@
+input FormPdv {
+	tradingName: String!
+	ownerName: String!
+	document: String!
+	address: AddressForm!
+	coverageArea: CoverageAreaForm!
+}
+
 type Pdv {
  	id: ID!
  	tradingName: String!
@@ -15,5 +23,5 @@ type Query {
 }
 
 type Mutation {
-  newPdv( tradingName: String!, ownerName: String!, document: String!, address: AddressInput!, coverageArea: CoverageAreaInput!) : Pdv!
+  newPdv( form: FormPdv! ) : Pdv!
 }
