@@ -11,7 +11,7 @@ import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.geom.Point;
 
 @Entity
-public class PontoDeVenda {
+public class PontoDeVenda implements StoreData {
 
     @Id
     @GeneratedValue

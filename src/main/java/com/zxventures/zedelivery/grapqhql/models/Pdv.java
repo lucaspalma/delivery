@@ -5,8 +5,9 @@ import javax.validation.constraints.NotNull;
 
 import com.zxventures.zedelivery.grapqhql.services.MultiPolygonParser;
 import com.zxventures.zedelivery.models.PontoDeVenda;
+import com.zxventures.zedelivery.models.StoreData;
 
-public class Pdv {
+public class Pdv implements StoreData {
 	
     private Long id;
 

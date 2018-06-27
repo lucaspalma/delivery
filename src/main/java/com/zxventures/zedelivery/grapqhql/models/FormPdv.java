@@ -7,8 +7,9 @@ import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.io.ParseException;
 import com.zxventures.zedelivery.models.PontoDeVenda;
+import com.zxventures.zedelivery.models.StoreData;
 
-public class FormPdv {
+public class FormPdv implements StoreData {
 
 	@NotNull
 	@NotBlank

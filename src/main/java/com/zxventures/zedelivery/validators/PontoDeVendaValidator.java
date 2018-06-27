@@ -18,9 +18,6 @@ public class PontoDeVendaValidator {
 		if(pdvRepository.findByDocument(pontoDeVenda.getDocument()) != null) {
 			throw new GraphQLException("The document " + pontoDeVenda.getDocument() + " already exists!");
 		}
-		
-		
-		
 	}
 	
 }
