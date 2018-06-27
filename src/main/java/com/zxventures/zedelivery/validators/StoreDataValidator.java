@@ -3,6 +3,7 @@ package com.zxventures.zedelivery.validators;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.zxventures.zedelivery.exceptions.DuplicatedDocumentException;
 import com.zxventures.zedelivery.models.StoreData;
 import com.zxventures.zedelivery.repositories.PdvRepository;
 
@@ -16,7 +17,7 @@ public class StoreDataValidator {
 	
 	public void validator(StoreData storeData) {
 		if(pdvRepository.findByDocument(storeData.getDocument()) != null) {
-			throw new GraphQLException("The document " + storeData.getDocument() + " already exists!");
+			throw new DuplicatedDocumentException(storeData.getDocument());
 		}
 	}
 	
