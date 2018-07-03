@@ -19,6 +19,7 @@ import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.io.ParseException;
 import com.vividsolutions.jts.io.WKTReader;
+import com.zxventures.zedelivery.exceptions.AddressNotCoveredException;
 import com.zxventures.zedelivery.models.PontoDeVenda;
 
 @RunWith(SpringRunner.class)
@@ -62,6 +63,21 @@ public class PdvRepositoryTest {
 		Point enderecoEntrega = (Point) new WKTReader().read("POINT(60 60)");
 		List<PontoDeVenda> pontosDeVenda = pdvRepository.searchPdvsThatCovergeThis(enderecoEntrega);
 		assertThat(pontosDeVenda, contains(pontoDeVenda));
+	}
+	
+	@Test
+	public void dentreOsPdvsOrdenadosPelaDistanciaDaquelesQueEstaoMaisPertoDoMeuEndereco() throws ParseException, AddressNotCoveredException {
+		MultiPolygon areaCobertura= (MultiPolygon) new WKTReader().read("MultiPolygon(((120 120, 120 200, 200 200, 120 120)), ((130 130, 200 130, 200 200, 130 130)))");
+		Point enderecoLonge = (Point) new WKTReader().read("POINT(200 200)");
+		PontoDeVenda pontoDeVendaLonge = new PontoDeVenda("Winter is coming", "Stark", "86.823.201/0001-04", enderecoLonge, areaCobertura);
+		Point enderecoPerto = (Point) new WKTReader().read("POINT(150 150)");
+		PontoDeVenda pontoDeVendaPerto = new PontoDeVenda("Fire and blood", "Targaryen", "62.407.723/0001-67", enderecoPerto, areaCobertura);
+		pdvRepository.save(pontoDeVendaLonge);
+		pdvRepository.save(pontoDeVendaPerto);
+		
+		Point enderecoEntrega = (Point) new WKTReader().read("POINT(160 160)");
+		List<PontoDeVenda> pontosDeVenda = pdvRepository.searchPdvsThatCovergeThis(enderecoEntrega);
+		assertThat(pontosDeVenda, contains(pontoDeVendaPerto, pontoDeVendaLonge));
 	}
 	
 }
