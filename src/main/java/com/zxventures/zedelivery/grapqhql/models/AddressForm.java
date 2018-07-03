@@ -7,9 +7,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Point;
-import com.vividsolutions.jts.io.ParseException;
-import com.vividsolutions.jts.io.WKTReader;
 
 public class AddressForm {
 
@@ -44,7 +44,7 @@ public class AddressForm {
 		this.coordinates = coordinates;
 	}
 
-	public Point getPoint() throws ParseException {
-		return (Point) new WKTReader().read(type.toUpperCase() + "(" + coordinates.get(0) + " " + coordinates.get(1) + ")");
+	public Point getPoint() {
+		return new GeometryFactory().createPoint(new Coordinate(coordinates.get(0), coordinates.get(1)));
 	}
 }
