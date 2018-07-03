@@ -18,7 +18,7 @@ type Pdv {
 type Query {
 	findAllPdvs: [Pdv]!
 	findPdv(id: ID!): Pdv!
-	searchPdv(lng: Float!, lat: Float!): Pdv!
+	searchPdv(lng: Float!, lat: Float!): [Pdv]!
 	
 }
 

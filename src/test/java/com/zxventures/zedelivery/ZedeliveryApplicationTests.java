@@ -139,7 +139,7 @@ public class ZedeliveryApplicationTests {
 				"      }" +
 				"   }\"" +
 				"}";
-		String jsonResposta = "{\"data\":{\"searchPdv\":{\"id\":\""+pontoDeVenda.getId()+"\",\"tradingName\":\"Grande montanha\",\"ownerName\":\"Gimli\",\"document\":\"38.670.058/0001-15\",\"address\":{\"type\":\"Point\",\"coordinates\":[10,20]},\"coverageArea\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[80,80],[80,90],[90,90],[90,80],[80,80]]],[[[70,70],[70,75],[75,75],[70,70]]]]}}}}";
+		String jsonResposta = "{\"data\":{\"searchPdv\":[{\"id\":\""+pontoDeVenda.getId()+"\",\"tradingName\":\"Grande montanha\",\"ownerName\":\"Gimli\",\"document\":\"38.670.058/0001-15\",\"address\":{\"type\":\"Point\",\"coordinates\":[10,20]},\"coverageArea\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[80,80],[80,90],[90,90],[90,80],[80,80]]],[[[70,70],[70,75],[75,75],[70,70]]]]}}]}}";
 
 		ResponseEntity<String> postForEntity = restTemplate.postForEntity("/graphql", mutation, String.class);
 		assertEquals(HttpStatus.OK, postForEntity.getStatusCode());
@@ -175,7 +175,7 @@ public class ZedeliveryApplicationTests {
 				"      }" +
 				"   }\"" +
 				"}";
-		String jsonResposta = "{\"data\":{\"searchPdv\":{\"id\":\""+pontoDeVenda.getId()+"\",\"tradingName\":\"Condado\",\"ownerName\":\"Bilbo\",\"document\":\"01.584.441/0001-40\",\"address\":{\"type\":\"Point\",\"coordinates\":[55,55]},\"coverageArea\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[50,50],[50,60],[60,60],[50,50]]],[[[70,70],[70,75],[75,75],[70,70]]]]}}}}";
+		String jsonResposta = "{\"data\":{\"searchPdv\":[{\"id\":\""+pontoDeVenda.getId()+"\",\"tradingName\":\"Condado\",\"ownerName\":\"Bilbo\",\"document\":\"01.584.441/0001-40\",\"address\":{\"type\":\"Point\",\"coordinates\":[55,55]},\"coverageArea\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[50,50],[50,60],[60,60],[50,50]]],[[[70,70],[70,75],[75,75],[70,70]]]]}}]}}";
 
 		ResponseEntity<String> postForEntity = restTemplate.postForEntity("/graphql", mutation, String.class);
 		assertEquals(HttpStatus.OK, postForEntity.getStatusCode());
@@ -183,7 +183,7 @@ public class ZedeliveryApplicationTests {
 	}
 	
 	@Test
-	public void naBuscaUmPdvQueAtendeMinhaLocalizacaoPegaAqueleQueEstaMaisPerto() throws ParseException {
+	public void naBuscaUmPdvQueAtendeMinhaLocalizacaoPegaOrdenadoDoMaisPertoParaOMaisLonge() throws ParseException {
 		MultiPolygon areaCobertura= (MultiPolygon) new WKTReader().read("MultiPolygon(((120 120, 120 200, 200 200, 120 120)), ((130 130, 200 130, 200 200, 130 130)))");
 		
 		Point enderecoLonge = (Point) new WKTReader().read("POINT(200 200)");
@@ -216,7 +216,7 @@ public class ZedeliveryApplicationTests {
 				"      }" +
 				"   }\"" +
 				"}";
-		String jsonResposta = "{\"data\":{\"searchPdv\":{\"id\":\""+pontoDeVendaPerto.getId()+"\",\"tradingName\":\"Fire and blood\",\"ownerName\":\"Targaryen\",\"document\":\"62.407.723/0001-67\",\"address\":{\"type\":\"Point\",\"coordinates\":[150,150]},\"coverageArea\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[120,120],[120,200],[200,200],[120,120]]],[[[130,130],[200,130],[200,200],[130,130]]]]}}}}";
+		String jsonResposta = "{\"data\":{\"searchPdv\":[{\"id\":\""+pontoDeVendaPerto.getId()+"\",\"tradingName\":\"Fire and blood\",\"ownerName\":\"Targaryen\",\"document\":\"62.407.723/0001-67\",\"address\":{\"type\":\"Point\",\"coordinates\":[150,150]},\"coverageArea\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[120,120],[120,200],[200,200],[120,120]]],[[[130,130],[200,130],[200,200],[130,130]]]]}},{\"id\":\""+pontoDeVendaLonge.getId()+"\",\"tradingName\":\"Winter is coming\",\"ownerName\":\"Stark\",\"document\":\"86.823.201/0001-04\",\"address\":{\"type\":\"Point\",\"coordinates\":[200,200]},\"coverageArea\":{\"type\":\"MultiPolygon\",\"coordinates\":[[[[120,120],[120,200],[200,200],[120,120]]],[[[130,130],[200,130],[200,200],[130,130]]]]}}]}}";
 
 		ResponseEntity<String> postForEntity = restTemplate.postForEntity("/graphql", mutation, String.class);
 		assertEquals(HttpStatus.OK, postForEntity.getStatusCode());
