@@ -34,11 +34,7 @@ public class Query implements GraphQLQueryResolver {
     }
 	
 	public Iterable<Pdv> searchPdv(Double lng, Double lat) throws ParseException, AddressNotCoveredException {
-		List<Pdv> pdvs = new ArrayList<>();
 		Point endereco = (Point) new WKTReader().read("POINT(" +lng+ " " + lat + ")");
-		for (PontoDeVenda pontoDeVenda : pdvRepository.searchPdvsThatCovergeThis(endereco)) {
-			pdvs.add(new Pdv(pontoDeVenda));
-		}
-		return pdvs;
+		return pdvRepository.searchPdvsThatCovergeThis(endereco, Pdv.class);
     }
 }

@@ -49,7 +49,7 @@ public class PdvRepositoryTest {
 		pdvRepository.save(pontoDeVenda3);
 		
 		Point enderecoEntrega = (Point) new WKTReader().read("POINT(71 71)");
-		List<PontoDeVenda> pontosDeVenda = pdvRepository.searchPdvsThatCovergeThis(enderecoEntrega);
+		List<PontoDeVenda> pontosDeVenda = pdvRepository.searchPdvsThatCovergeThis(enderecoEntrega, PontoDeVenda.class);
 		assertThat(pontosDeVenda, containsInAnyOrder(pontoDeVenda, pontoDeVenda2));
 	}
 
@@ -61,7 +61,7 @@ public class PdvRepositoryTest {
 		pdvRepository.save(pontoDeVenda);
 		
 		Point enderecoEntrega = (Point) new WKTReader().read("POINT(60 60)");
-		List<PontoDeVenda> pontosDeVenda = pdvRepository.searchPdvsThatCovergeThis(enderecoEntrega);
+		List<PontoDeVenda> pontosDeVenda = pdvRepository.searchPdvsThatCovergeThis(enderecoEntrega, PontoDeVenda.class);
 		assertThat(pontosDeVenda, contains(pontoDeVenda));
 	}
 	
@@ -76,7 +76,7 @@ public class PdvRepositoryTest {
 		pdvRepository.save(pontoDeVendaPerto);
 		
 		Point enderecoEntrega = (Point) new WKTReader().read("POINT(160 160)");
-		List<PontoDeVenda> pontosDeVenda = pdvRepository.searchPdvsThatCovergeThis(enderecoEntrega);
+		List<PontoDeVenda> pontosDeVenda = pdvRepository.searchPdvsThatCovergeThis(enderecoEntrega, PontoDeVenda.class);
 		assertThat(pontosDeVenda, contains(pontoDeVendaPerto, pontoDeVendaLonge));
 	}
 	
