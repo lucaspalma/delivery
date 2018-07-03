@@ -10,10 +10,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
 import com.zxventures.zedelivery.exceptions.GraphQLErrorAdapter;
+import com.zxventures.zedelivery.grapqhql.services.NewPdvService;
 import com.zxventures.zedelivery.repositories.PdvRepository;
 import com.zxventures.zedelivery.resolvers.Mutation;
 import com.zxventures.zedelivery.resolvers.Query;
-import com.zxventures.zedelivery.validators.StoreDataValidator;
 
 import graphql.ExceptionWhileDataFetching;
 import graphql.GraphQLError;
@@ -59,7 +59,7 @@ public class ZedeliveryApplication {
 	}
 	
 	@Bean
-	public Mutation mutation(PdvRepository pdvRepository, StoreDataValidator pontoDeVendaValidator) {
-		return new Mutation(pdvRepository, pontoDeVendaValidator);
+	public Mutation mutation(NewPdvService newPdvService) {
+		return new Mutation(newPdvService);
 	}
 }

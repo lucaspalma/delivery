@@ -4,24 +4,17 @@ import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.vividsolutions.jts.io.ParseException;
 import com.zxventures.zedelivery.grapqhql.models.FormPdv;
 import com.zxventures.zedelivery.grapqhql.models.Pdv;
-import com.zxventures.zedelivery.models.PontoDeVenda;
-import com.zxventures.zedelivery.repositories.PdvRepository;
-import com.zxventures.zedelivery.validators.StoreDataValidator;
+import com.zxventures.zedelivery.grapqhql.services.NewPdvService;
 
 public class Mutation implements GraphQLMutationResolver {
-	private PdvRepository pdvRepository;
-	private StoreDataValidator pontoDeVendaValidator;
+	private NewPdvService newPdvService;
 
-    public Mutation(PdvRepository pdvRepository, StoreDataValidator pontoDeVendaValidator) {
-		this.pdvRepository = pdvRepository;
-		this.pontoDeVendaValidator = pontoDeVendaValidator;
+    public Mutation(NewPdvService newPdvService) {
+		this.newPdvService = newPdvService;
     }
 
     public Pdv newPdv(FormPdv formPdv) throws ParseException {
-    	pontoDeVendaValidator.validator(formPdv);
-    	PontoDeVenda pv = formPdv.getPontoDeVenda(); 
-    	pdvRepository.save(pv);
-    	return new Pdv(pv);
+    	return newPdvService.createPdvOf(formPdv);
     }
 
 }
