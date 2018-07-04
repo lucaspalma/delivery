@@ -1,9 +1,9 @@
 type Address {
 	type: String!
-	coordinates: [Int!]!
+	coordinates: [Float!]!
 }
 
 input AddressForm {
 	type: String!
-	coordinates: [Int!]!
+	coordinates: [Float!]!
 }

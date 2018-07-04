@@ -1,9 +1,9 @@
 type CoverageArea {
 	type: String!
-	coordinates: [[[[Int!]]]]!
+	coordinates: [[[[Float!]]]]!
 }
 
 input CoverageAreaForm {
 	type: String!
-	coordinates: [[[[Int!]]]]!
+	coordinates: [[[[Float!]]]]!
 }
