@@ -13,7 +13,7 @@ public class MultiPolygonParser {
 
 	public static List<List<List<List<Double>>>> getCoordinatesList(MultiPolygon multiPolygon) {
 		List<List<List<List<Double>>>> coordinates = new ArrayList<>();
-		for (int i = 0; i < multiPolygon.getDimension(); i++) {
+		for (int i = 0; i < multiPolygon.getNumGeometries(); i++) {
 			Geometry polygon = multiPolygon.getGeometryN(i).getBoundary();
 			List<List<List<Double>>> polygonList = new ArrayList<>();
 			if(polygon instanceof MultiLineString) {				

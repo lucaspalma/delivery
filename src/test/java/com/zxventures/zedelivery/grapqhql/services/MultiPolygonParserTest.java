@@ -14,6 +14,14 @@ import com.vividsolutions.jts.io.WKTReader;
 public class MultiPolygonParserTest {
 
 	@Test
+	public void geraAsCoordenadasParaApenasUmPoligono() throws ParseException {
+		MultiPolygon multiPolygon = (MultiPolygon) new WKTReader().read("MULTIPOLYGON (((35 21, 43 56, 12 34, 35 21)))");
+		List<List<List<List<Double>>>> coordinates = MultiPolygonParser.getCoordinatesList(multiPolygon);;
+		assertEquals("[[[[35.0, 21.0], [43.0, 56.0], [12.0, 34.0], [35.0, 21.0]]]]",
+					coordinates.toString());
+	}
+	
+	@Test
 	public void geraAsCoordenadasCorretasAPartirDosPoligonosDaAreaDeCobertura() throws ParseException {
 		MultiPolygon multiPolygon = (MultiPolygon) new WKTReader().read("MULTIPOLYGON (((35 21, 43 56, 12 34, 35 21)),((15 10, 42 15, 11 22, 6 12, 15 10)))");
 		List<List<List<List<Double>>>> coordinates = MultiPolygonParser.getCoordinatesList(multiPolygon);;
