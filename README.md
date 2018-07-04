@@ -33,7 +33,7 @@ Se estiver usando alguma IDE, você também pode subir o projeto executando a cl
 
 ### Configurando os testes
 
-Para rodar os testes localmente, você também precisará passar o usuário e senha do seu banco de dados MySql, agor no arquivo `src/test/resources/application-test.properties` nos atributos `spring.datasource.username` e `spring.datasource.password`.
+Para rodar os testes localmente, você também precisará passar o usuário e senha do seu banco de dados MySql, agora no arquivo `src/test/resources/application-test.properties` nos atributos `spring.datasource.username` e `spring.datasource.password`.
 
 ### Rodando os testes
 
